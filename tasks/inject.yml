@@ -1,0 +1,15 @@
+---
+- name: Ensure ssh directories exist
+  sudo: yes
+  file: path={{item.home}}/.ssh state=directory owner={{item.name}} group={{item.group}}
+  with_items: github_users
+
+- name: Inject personal rack enabled key
+  sudo: yes
+  copy: src=~/.ssh/leos_rsa dest={{item.home}}/.ssh/leos_rsa force=yes owner={{item.name}} group={{item.group}}
+  with_items: github_users
+
+- name: Config ssh to use the key for anything within github
+  sudo: yes
+  copy: src=ssh_config dest={{item.home}}/.ssh/config owner={{item.name}} group={{item.group}}
+  with_items: github_users
