@@ -1,3 +1,3 @@
 ---
 - include: inject.yml
-  when: github_users is defined
+  when: github_users is defined and github_key is defined
