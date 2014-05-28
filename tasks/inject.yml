@@ -6,7 +6,7 @@
 
 - name: Inject personal rack enabled key
   sudo: yes
-  copy: src={{github_key}} dest={{item.home}}/.ssh/github_rsa force=yes owner={{item.name}} group={{item.group}}
+  copy: src={{github_key}} dest={{item.home}}/.ssh/github_rsa force=yes owner={{item.name}} group={{item.group}} mode=0600
   with_items: github_users
 
 - name: Config ssh to use the key for anything within github
